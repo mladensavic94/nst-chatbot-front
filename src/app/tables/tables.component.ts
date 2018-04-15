@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RequestOptions, Headers, Response, Http} from "@angular/http";
 
 declare interface TableData {
     headerRow: string[];
@@ -11,34 +12,32 @@ declare interface TableData {
   styleUrls: ['./tables.component.css']
 })
 export class TablesComponent implements OnInit {
-    public tableData1: TableData;
-    public tableData2: TableData;
-
-  constructor() { }
+    public tableData: TableData;
+    public arrayData: string[][] = new Array<string[]>();
+    constructor(private http: Http) {
+    }
 
   ngOnInit() {
-      this.tableData1 = {
-          headerRow: [ 'ID', 'Name', 'Country', 'City', 'Salary'],
-          dataRows: [
-              ['1', 'Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738'],
-              ['2', 'Minerva Hooper', 'Curaçao', 'Sinaai-Waas', '$23,789'],
-              ['3', 'Sage Rodriguez', 'Netherlands', 'Baileux', '$56,142'],
-              ['4', 'Philip Chaney', 'Korea, South', 'Overland Park', '$38,735'],
-              ['5', 'Doris Greene', 'Malawi', 'Feldkirchen in Kärnten', '$63,542'],
-              ['6', 'Mason Porter', 'Chile', 'Gloucester', '$78,615']
-          ]
-      };
-      this.tableData2 = {
-          headerRow: [ 'ID', 'Name',  'Salary', 'Country', 'City' ],
-          dataRows: [
-              ['1', 'Dakota Rice','$36,738', 'Niger', 'Oud-Turnhout' ],
-              ['2', 'Minerva Hooper', '$23,789', 'Curaçao', 'Sinaai-Waas'],
-              ['3', 'Sage Rodriguez', '$56,142', 'Netherlands', 'Baileux' ],
-              ['4', 'Philip Chaney', '$38,735', 'Korea, South', 'Overland Park' ],
-              ['5', 'Doris Greene', '$63,542', 'Malawi', 'Feldkirchen in Kärnten', ],
-              ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
-          ]
+      this.getAppointments().subscribe(
+          resBody => {
+            for(let i = 0; i < resBody.length; i++){
+                this.arrayData.push([resBody[i].id, resBody[i].name, resBody[i].officeHours.beginTime, resBody[i].length, resBody[i].status]);
+            }
+          },
+          error => console.log(error)
+      );
+      this.tableData = {
+          headerRow: [ 'ID', 'Ime i prezime', 'Datum', 'Trajanje', 'Status', 'Akcija'],
+          dataRows: this.arrayData
       };
   }
+
+    getAppointments() {
+        let emailQ = atob(localStorage.getItem("email"));
+        let url = 'https://nst-chatbot.herokuapp.com/rest/appointments?email=' + emailQ;
+        let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+        let options = new RequestOptions({headers: headers});
+        return this.http.get(url, options).map((res: Response) => res.json());
+    }
 
 }
