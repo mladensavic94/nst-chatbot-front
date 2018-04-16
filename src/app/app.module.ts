@@ -22,6 +22,7 @@ import {Tab} from './home/tab.component';
 import {Tabs} from './home/tabs.component';
 
 
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -30,6 +31,7 @@ import {Tabs} from './home/tabs.component';
         TablesComponent,
         Tabs,
         Tab
+        
         
     ],
     imports: [

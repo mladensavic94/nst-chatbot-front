@@ -22,7 +22,7 @@ export class UserComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getProfessor().subscribe(
+    /*    this.getProfessor().subscribe(
             resBody => {
                 this.email = resBody.email;
                 this.password = resBody.password;
@@ -37,7 +37,7 @@ export class UserComponent implements OnInit {
                 this.datumKraj = resBody[0].endTime;
             },
             error => console.log(error)
-        );
+        );*/
     }
 
     getProfessor() {

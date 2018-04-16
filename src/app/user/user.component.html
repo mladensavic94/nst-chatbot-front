@@ -54,25 +54,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Datum konsultacija - Pocetak</label>
-                                        <input type="datetime-local" required class="form-control" placeholder="Datum"
-                                               [value]="datumPocetak | date:'yyyy-MM-ddTHH:mm:ss'"
-                                               (input)="datumPocetak = $event.target.value">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label>Raspored konsultacija</label>
+                                            <ng2-flatpickr formControlName="formControlName"></ng2-flatpickr>
+                                         <!--   <input type="datetime-local" required class="form-control" placeholder="Datum"
+                                                   [value]="datumKraj | date:'yyyy-MM-ddTHH:mm:ss'"
+                                                   (input)="datumKraj = $event.target.value"> -->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Datum konsultacija - Kraj</label>
-                                        <input type="datetime-local" required class="form-control" placeholder="Datum"
-                                               [value]="datumKraj | date:'yyyy-MM-ddTHH:mm:ss'"
-                                               (input)="datumKraj = $event.target.value">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="alert alert-danger" [hidden] = "!isMessageSet()" ><label style="color: black">{{message}}</label></div>
                             <button type="submit" class="btn btn-info btn-fill" (click)="saveChanges()">Sacuvaj promene
                             </button>
