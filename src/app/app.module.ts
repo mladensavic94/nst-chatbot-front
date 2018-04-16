@@ -18,13 +18,19 @@ import {TablesComponent} from './tables/tables.component';
 import {AuthGuardService} from "./auth/auth-guard.service";
 import {JwtHelper} from "angular2-jwt";
 import {AuthService} from "./auth/auth.service";
+import {Tab} from './home/tab.component';
+import {Tabs} from './home/tabs.component';
+
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         UserComponent,
-        TablesComponent
+        TablesComponent,
+        Tabs,
+        Tab
+        
     ],
     imports: [
         BrowserModule,

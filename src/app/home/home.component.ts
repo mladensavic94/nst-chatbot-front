@@ -10,8 +10,10 @@ import {Router} from "@angular/router";
 })
 export class HomeComponent implements OnInit {
 
-    email: string = "mladen@gmail.com";
-    password: string = "msavic";
+    email: string = "";
+    password: string = "";
+    ime: string = "";
+    prezime: string = "";
     message: string = "";
 
     constructor(private http: Http, private router: Router) {

@@ -1,27 +1,62 @@
 <div class="main-content">
     <div class="container-fluid">
        <div class="col-md-6 col-md-offset-3">
-           <div class="card">
-               <div class="row">
-                   <div class="header col-md-offset-1">
-                       <h4 class="title">Login</h4>
-                   </div>
-                   <div class="content col-md-8 col-md-offset-1 centered">
-                       <form>
-                           <div class="alert alert-danger" [hidden] = "!isMessageSet()" ><label style="color: black">{{message}}</label></div>
-                           <div class="form-group">
-                               <label>Email</label>
-                               <input type="email" class="form-control" placeholder="Email" [value] = "email" (input)="email = $event.target.value">
-                           </div>
-                           <div class="form-group">
-                               <label>Password</label>
-                               <input type="password" class="form-control" placeholder="Password" [value] = "password" (input)="password = $event.target.value">
-                           </div>
-                           <button type="submit" class="btn btn-info btn-fill" (click) = "login()">Login</button>
-                       </form>
-                   </div>
-               </div>
-           </div>
+            <div class="card">
+                <div class="row">
+                    <tabs>
+                        <tab tabTitle= "Login">
+                            <div class="header col-md-offset-1">
+                                <h4 class="title">Login</h4>
+                            </div>
+                            <div class="content col-md-8 col-md-offset-1 centered">
+                                <form>
+                                    <div class="alert alert-danger" [hidden] = "!isMessageSet()" ><label style="color: black">{{message}}</label></div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" placeholder="Email" [value] = "email" (input)="email = $event.target.value">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control" placeholder="Password" [value] = "password" (input)="password = $event.target.value">
+                                    </div>
+                                    <button type="submit" class="btn btn-info btn-fill" (click) = "login()">Login</button>
+                                </form>
+                            </div>
+                        </tab>
+                        <tab tabTitle= "Registracija">
+                            <div class="header col-md-offset-1">
+                                    <h4 class="title">Registracija</h4>
+                                </div>
+                            <div class="content col-md-8 col-md-offset-1 centered">
+                                <form>
+                                    <div class="alert alert-danger" [hidden] = "!isMessageSet()" ><label style="color: black">{{message}}</label></div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" placeholder="Email" [value] = "email" (input)="email = $event.target.value">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Sifra</label>
+                                        <input type="password" class="form-control" placeholder="Password" [value] = "password" (input)="password = $event.target.value">
+                                    </div>
+                                    <div class="form-group">
+                                            <label>Ponovi sifru</label>
+                                            <input type="password" class="form-control" placeholder="Password" [value] = "password" (input)="password = $event.target.value">
+                                    </div>
+                                    <div class="form-group">
+                                            <label>Ime</label>
+                                            <input type="text" class="form-control" placeholder="Ime" [value] = "ime" (input)="ime = $event.target.value">
+                                    </div>
+                                    <div class="form-group">
+                                            <label>Prezime</label>
+                                            <input type="text" class="form-control" placeholder="Prezime" [value] = "prezime" (input)="prezime = $event.target.value">
+                                    </div>
+                                    <button type="submit" class="btn btn-info btn-fill" (click) = "login()">Registracija</button>
+                                </form>
+                            </div>
+                        </tab>
+                    </tabs>
+                </div>
+            </div>
        </div>
     </div>
 </div>
