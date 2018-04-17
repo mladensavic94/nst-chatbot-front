@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Tab } from "./tab.component";
+import {HomeComponent} from "./home.component";
 
 @Component({
     selector: 'tabs',
@@ -12,12 +13,18 @@ import { Tab } from "./tab.component";
 })
 export class Tabs {
     tabs: Tab[] = [];
+    home: HomeComponent;
+
+    constructor(home:HomeComponent){
+        this.home = home;
+    }
 
     selectTab(tab: Tab) {
         this.tabs.forEach((tab) => {
             tab.active = false;
         });
         tab.active = true;
+        this.home.message = "";
     }
 
     addTab(tab: Tab) {

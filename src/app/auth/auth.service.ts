@@ -8,8 +8,7 @@ export class AuthService {
 
 
     public isAuthenticated(): boolean {
-        return true;
-        //let email = localStorage.getItem("email");
-        //return email != null;
+        let email = localStorage.getItem("email");
+        return email != null;
     }
 }

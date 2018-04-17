@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="form-group">
                                             <label>Ponovi sifru</label>
-                                            <input type="password" class="form-control" placeholder="Password" [value] = "password" (input)="password = $event.target.value">
+                                            <input type="password" class="form-control" placeholder="Password" [value] = "password2" (input)="password2 = $event.target.value">
                                     </div>
                                     <div class="form-group">
                                             <label>Ime</label>
@@ -50,7 +50,7 @@
                                             <label>Prezime</label>
                                             <input type="text" class="form-control" placeholder="Prezime" [value] = "prezime" (input)="prezime = $event.target.value">
                                     </div>
-                                    <button type="submit" class="btn btn-info btn-fill" (click) = "login()">Registracija</button>
+                                    <button type="submit" class="btn btn-info btn-fill" (click) = "register()">Registracija</button>
                                 </form>
                             </div>
                         </tab>

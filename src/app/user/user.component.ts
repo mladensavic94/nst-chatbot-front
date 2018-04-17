@@ -9,35 +9,31 @@ import 'rxjs/add/operator/map';
 })
 export class UserComponent implements OnInit {
 
-    email: string = "";
-    password: string = "";
-    password2: string = "";
-    ime: string = "";
-    prezime: string = "";
-    datumPocetak: string;
-    datumKraj: string;
+    idProfessor: number;
+    email: string;
+    password: string;
+    password2: string;
+    ime: string;
+    prezime: string;
+    datumPocetak: string = new Date().toDateString();
+    datumKraj: string = new Date().toDateString();
     message: string = "";
-
+    officeHoursList: any[];
     constructor(private http: Http) {
     }
 
     ngOnInit() {
-    /*    this.getProfessor().subscribe(
+        this.getProfessor().subscribe(
             resBody => {
+                this.idProfessor = resBody.idprofessor;
                 this.email = resBody.email;
                 this.password = resBody.password;
                 this.ime = resBody.firstName;
                 this.prezime = resBody.lastName;
+                this.officeHoursList = resBody.listOfOfficeHours;
             },
             error => console.log(error)
         );
-        this.getOfficeHours().subscribe(
-            resBody => {
-                this.datumPocetak = resBody[0].beginTime;
-                this.datumKraj = resBody[0].endTime;
-            },
-            error => console.log(error)
-        );*/
     }
 
     getProfessor() {
@@ -49,25 +45,18 @@ export class UserComponent implements OnInit {
         return this.http.get(url, options).map((res: Response) => res.json());
     }
 
-    getOfficeHours() {
-        let emailQ = atob(localStorage.getItem("email"));
-        let url = 'https://nst-chatbot.herokuapp.com/rest/officehours?email=' + emailQ;
-        let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-        let options = new RequestOptions({headers: headers});
-        return this.http.get(url, options).map((res: Response) => res.json());
+    saveChanges(){
+        this.saveChangesInDB().subscribe(resBody => this.message="shit saved!");
     }
-
-    saveChanges() {
+    saveChangesInDB() {
         if (this.checkTime()) {
             if (this.checkPassword()) {
-                let url = 'https://nst-chatbot.herokuapp.com/rest/officehours';
+                let url = 'https://nst-chatbot.herokuapp.com/rest/professor/save';
                 let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
                 let options = new RequestOptions({headers: headers});
-                let json = "{\"professor\":{\"idprofessor\":3,\"email\":\"" + this.email + "\",\"password\":\"" + this.password + "\",\"firstName\":\"" + this.ime + "\",\"lastName\":\"" + this.prezime + "\"},\"beginTime\":\"" + this.datumPocetak + "\",\"endTime\":\"" + this.datumKraj + "\"}";
+                let json = "{\"idprofessor\":"+this.idProfessor+",\"email\":\""+this.email+"\",\"password\":\""+this.password+"\",\"firstName\":\""+this.ime+"\",\"lastName\":\""+this.prezime+"\", \"listOfOfficeHours\": "+JSON.stringify(this.officeHoursList)+"}";
                 console.log(json);
-                // this.http.post(url, json, options).map((res: Response) => res.json());
-                this.message = "";
-
+                return this.http.post(url, json, options).map((res: Response) => res.json());
             }else{
                 this.message = "Sifra je manje od 6 karaktera ili nije dobro ponovljena";
             }
@@ -79,9 +68,10 @@ export class UserComponent implements OnInit {
 
 
     checkTime(): boolean {
-        let millis = Date.parse(this.datumKraj) - Date.parse(this.datumPocetak);
-        let hours = millis / 1000 / 60 / 60;
-        return hours == 3;
+        // let millis = Date.parse(this.datumKraj) - Date.parse(this.datumPocetak);
+        // let hours = millis / 1000 / 60 / 60;
+        // return hours == 3;
+        return true;
     }
 
     checkPassword(): boolean {
@@ -90,6 +80,11 @@ export class UserComponent implements OnInit {
 
     isMessageSet ():boolean {
         return this.message != "";
+    }
+
+    addOfficeHour(){
+        let json = JSON.parse("{\"beginTime\": \""+this.datumPocetak+"\", \"endTime\": \""+this.datumKraj+"\"}");
+        this.officeHoursList.push(json);
     }
 
 

@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 
     email: string = "";
     password: string = "";
+    password2: string = "";
     ime: string = "";
     prezime: string = "";
     message: string = "";
@@ -41,12 +42,35 @@ export class HomeComponent implements OnInit {
             error => this.message = error,
         );
     }
+    register(){
+        if(this.email != ""){
+            if(this.password != ""){
+                if(this.ime != ""){
+                    if(this.prezime != ""){
+                        if(this.password == this.password2){
+                            this.saveProfessor().subscribe(resBody => this.message="shit updated!");
+                        }else this.message = "Sifre se ne poklapaju!";
+                    }else this.message = "Prezime ne sme biti prazno!";
+                }else this.message = "Ime ne sme biti prazno!";
+            }else this.message = "Sifra ne sme biti prazna!"
+        }else this.message = "Email ne sme biti prazan!";
+    }
 
     getProfessor() {
         let url = 'https://nst-chatbot.herokuapp.com/rest/professor?email='+ this.email +'&password=' + this.password;
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers });
         return this.http.get(url, options).map((res:Response) => res.json());
+    }
+
+    saveProfessor(){
+        let url = 'https://nst-chatbot.herokuapp.com/rest/professor/save';
+        let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+        let json = "{\"email\":\"" + this.email + "\",\"password\":\"" + this.password + "\",\"firstName\":\"" + this.ime + "\",\"lastName\":\"" + this.prezime + "\"}";
+        return this.http.post(url, json).map((res: Response) => {
+            res.headers;
+        });
+
     }
 
     isMessageSet ():boolean {

@@ -8,6 +8,8 @@
                     </div>
                     <div class="content">
                         <form>
+                            <div class="alert alert-danger" [hidden]="!isMessageSet()"><label style="color: black">{{message}}</label>
+                            </div>
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="form-group">
@@ -54,18 +56,43 @@
                                 </div>
                             </div>
                             <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <label>Raspored konsultacija</label>
-                                            <ng2-flatpickr formControlName="formControlName"></ng2-flatpickr>
-                                         <!--   <input type="datetime-local" required class="form-control" placeholder="Datum"
-                                                   [value]="datumKraj | date:'yyyy-MM-ddTHH:mm:ss'"
-                                                   (input)="datumKraj = $event.target.value"> -->
-                                        </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Raspored konsultacija</label>
+                                        <input list="officeHours" class="form-control">
+                                        <datalist id="officeHours" tabindex="1">
+                                            <option *ngFor="let o of officeHoursList"
+                                                    value="{{o.beginTime | date:'H:mm dd. MMM'}} - {{o.endTime | date:'H:mm dd. MMM'}}"></option>
+                                        </datalist>
                                     </div>
                                 </div>
-                            <div class="alert alert-danger" [hidden] = "!isMessageSet()" ><label style="color: black">{{message}}</label></div>
-                            <button type="submit" class="btn btn-info btn-fill" (click)="saveChanges()">Sacuvaj promene
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Pocetak konsultacija</label>
+                                        <input type="datetime-local" required class="form-control"
+                                               placeholder="Novi datum - pocetak"
+                                               [value]="datumPocetak | date:'yyyy-MM-ddTHH:mm:ss'"
+                                               (input)="datumPocetak = $event.target.value"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Kraj konsultacija</label>
+                                        <input type="datetime-local" required class="form-control"
+                                               placeholder="Novi datum - kraj"
+                                               [value]="datumKraj | date:'yyyy-MM-ddTHH:mm:ss'"
+                                               (input)="datumKraj = $event.target.value"></div>
+                                </div>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-accept btn-fill" (click)="addOfficeHour()">Dodaj novi termin
+                            </button>
+                            <br><br>
+                            <button type="submit" class="btn btn-success btn-fill" (click)="saveChanges()">Sacuvaj promene
                             </button>
                             <div class="clearfix"></div>
                         </form>

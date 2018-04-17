@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 
+
 import {AppRoutingModule} from './app.routing';
 import {NavbarModule} from './shared/navbar/navbar.module';
 import {FooterModule} from './shared/footer/footer.module';
@@ -20,7 +21,6 @@ import {JwtHelper} from "angular2-jwt";
 import {AuthService} from "./auth/auth.service";
 import {Tab} from './home/tab.component';
 import {Tabs} from './home/tabs.component';
-
 
 
 @NgModule({
@@ -43,7 +43,7 @@ import {Tabs} from './home/tabs.component';
         SidebarModule,
         RouterModule,
         AppRoutingModule,
-        LbdModule
+        LbdModule,
     ],
     providers: [
         AuthGuardService,
