@@ -21,6 +21,7 @@ import {JwtHelper} from "angular2-jwt";
 import {AuthService} from "./auth/auth.service";
 import {Tab} from './home/tab.component';
 import {Tabs} from './home/tabs.component';
+import {ProfessorService} from './services/professorService';
 
 
 @NgModule({
@@ -43,11 +44,12 @@ import {Tabs} from './home/tabs.component';
         SidebarModule,
         RouterModule,
         AppRoutingModule,
-        LbdModule,
+        LbdModule        
     ],
     providers: [
         AuthGuardService,
         AuthService,
+        ProfessorService,
         JwtHelper],
     bootstrap: [AppComponent]
 })

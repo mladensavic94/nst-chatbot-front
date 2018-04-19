@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Http, RequestOptions, Headers, Response} from "@angular/http";
 import 'rxjs/add/operator/map';
+import { ProfessorService } from '../services/professorService';
 
 @Component({
     selector: 'app-user',
@@ -19,11 +20,12 @@ export class UserComponent implements OnInit {
     datumKraj: string = new Date().toDateString();
     message: string = "";
     officeHoursList: any[];
-    constructor(private http: Http) {
+
+    constructor(private http: Http, private professorService: ProfessorService) {
     }
 
     ngOnInit() {
-        this.getProfessor().subscribe(
+        this.professorService.getProfessor(atob(sessionStorage.getItem("email")), atob(sessionStorage.getItem("password"))).subscribe(
             resBody => {
                 this.idProfessor = resBody.idprofessor;
                 this.email = resBody.email;
@@ -36,28 +38,12 @@ export class UserComponent implements OnInit {
         );
     }
 
-    getProfessor() {
-        let emailQ = atob(localStorage.getItem("email"));
-        let passQ = atob(localStorage.getItem("password"));
-        let url = 'https://nst-chatbot.herokuapp.com/rest/professor?email=' + emailQ + '&password=' + passQ;
-        let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-        let options = new RequestOptions({headers: headers});
-        return this.http.get(url, options).map((res: Response) => res.json());
-    }
-
     saveChanges(){
-        this.saveChangesInDB().subscribe(resBody => this.message="shit saved!");
-    }
-    saveChangesInDB() {
         if (this.checkTime()) {
             if (this.checkPassword()) {
-                let url = 'https://nst-chatbot.herokuapp.com/rest/professor/save';
-                let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-                let options = new RequestOptions({headers: headers});
-                let json = "{\"idprofessor\":"+this.idProfessor+",\"email\":\""+this.email+"\",\"password\":\""+this.password+"\",\"firstName\":\""+this.ime+"\",\"lastName\":\""+this.prezime+"\", \"listOfOfficeHours\": "+JSON.stringify(this.officeHoursList)+"}";
-                console.log(json);
-                return this.http.post(url, json, options).map((res: Response) => res.json());
-            }else{
+                this.professorService.saveProfessor(this.idProfessor, this.email,this.password,this.ime, this.prezime, this.officeHoursList).subscribe(resBody => this.message="shit saved!");
+            }
+            else{
                 this.message = "Sifra je manje od 6 karaktera ili nije dobro ponovljena";
             }
 
@@ -65,7 +51,6 @@ export class UserComponent implements OnInit {
             this.message = "Razmak izmedju pocetnog i krajnjeg datuma treba biti tacno 3h";
         }
     }
-
 
     checkTime(): boolean {
         // let millis = Date.parse(this.datumKraj) - Date.parse(this.datumPocetak);

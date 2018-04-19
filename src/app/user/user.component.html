@@ -59,8 +59,8 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Raspored konsultacija</label>
-                                        <input list="officeHours" class="form-control">
-                                        <datalist id="officeHours" tabindex="1">
+                                        <input list="officeHours" class="form-control" value="{{officeHoursList[0].beginTime | date:'H:mm dd. MMM'}} - {{officeHoursList[0].endTime | date:'H:mm dd. MMM'}}">
+                                        <datalist id="officeHours">
                                             <option *ngFor="let o of officeHoursList"
                                                     value="{{o.beginTime | date:'H:mm dd. MMM'}} - {{o.endTime | date:'H:mm dd. MMM'}}"></option>
                                         </datalist>
@@ -73,7 +73,7 @@
                                         <label>Pocetak konsultacija</label>
                                         <input type="datetime-local" required class="form-control"
                                                placeholder="Novi datum - pocetak"
-                                               [value]="datumPocetak | date:'yyyy-MM-ddTHH:mm:ss'"
+                                               [value]="datumPocetak | date:'H:mm\'h\' dd. MMM'"
                                                (input)="datumPocetak = $event.target.value"></div>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                                         <label>Kraj konsultacija</label>
                                         <input type="datetime-local" required class="form-control"
                                                placeholder="Novi datum - kraj"
-                                               [value]="datumKraj | date:'yyyy-MM-ddTHH:mm:ss'"
+                                               [value]="datumKraj | date:'H:mm\'h\' dd. MMM'"
                                                (input)="datumKraj = $event.target.value"></div>
                                 </div>
                             </div>
