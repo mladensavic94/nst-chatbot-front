@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Http, Response, RequestOptions, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Router} from "@angular/router";
+import { Tabs } from './tabs.component';
 
 @Component({
     selector: 'app-home',
@@ -28,8 +29,8 @@ export class HomeComponent implements OnInit {
         this.getProfessor().subscribe(
             resBody =>{
                 if( resBody != null){
-                    localStorage.setItem("email", btoa(this.email));
-                    localStorage.setItem("password", btoa(this.password));
+                    sessionStorage.setItem("email", btoa(this.email));
+                    sessionStorage.setItem("password", btoa(this.password));
                     this.router.navigate(['table']);
                     this.message = "";
                 }else{
@@ -48,7 +49,12 @@ export class HomeComponent implements OnInit {
                 if(this.ime != ""){
                     if(this.prezime != ""){
                         if(this.password == this.password2){
-                            this.saveProfessor().subscribe(resBody => this.message="shit updated!");
+                        this.saveProfessor().subscribe(resBody => {
+                            window.location.reload();
+                        },
+                        error => {
+                            this.message = "Doslo je do greske prilikom registracije";
+                        });
                         }else this.message = "Sifre se ne poklapaju!";
                     }else this.message = "Prezime ne sme biti prazno!";
                 }else this.message = "Ime ne sme biti prazno!";

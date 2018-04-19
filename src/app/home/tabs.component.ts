@@ -13,10 +13,8 @@ import {HomeComponent} from "./home.component";
 })
 export class Tabs {
     tabs: Tab[] = [];
-    home: HomeComponent;
 
-    constructor(home:HomeComponent){
-        this.home = home;
+    constructor(private home:HomeComponent){
     }
 
     selectTab(tab: Tab) {
@@ -27,6 +25,13 @@ export class Tabs {
         this.home.message = "";
     }
 
+    selectTabByNum(num: number) {
+        this.tabs.forEach((tab) => {
+            tab.active = false;
+        });
+        this.tabs[num].active = true;
+        this.home.message = "";
+    }
     addTab(tab: Tab) {
         if (this.tabs.length === 0) {
             tab.active = true;

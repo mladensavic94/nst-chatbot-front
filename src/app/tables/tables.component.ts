@@ -33,7 +33,7 @@ export class TablesComponent implements OnInit {
   }
 
     getAppointments() {
-        let emailQ = atob(localStorage.getItem("email"));
+        let emailQ = atob(sessionStorage.getItem("email"));
         let url = 'https://nst-chatbot.herokuapp.com/rest/appointments?email=' + emailQ;
         let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
         let options = new RequestOptions({headers: headers});

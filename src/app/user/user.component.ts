@@ -19,6 +19,7 @@ export class UserComponent implements OnInit {
     datumKraj: string = new Date().toDateString();
     message: string = "";
     officeHoursList: any[];
+    officeHour: any;
     constructor(private http: Http) {
     }
 
@@ -31,14 +32,15 @@ export class UserComponent implements OnInit {
                 this.ime = resBody.firstName;
                 this.prezime = resBody.lastName;
                 this.officeHoursList = resBody.listOfOfficeHours;
+                
             },
             error => console.log(error)
         );
     }
 
     getProfessor() {
-        let emailQ = atob(localStorage.getItem("email"));
-        let passQ = atob(localStorage.getItem("password"));
+        let emailQ = atob(sessionStorage.getItem("email"));
+        let passQ = atob(sessionStorage.getItem("password"));
         let url = 'https://nst-chatbot.herokuapp.com/rest/professor?email=' + emailQ + '&password=' + passQ;
         let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
         let options = new RequestOptions({headers: headers});
@@ -85,6 +87,10 @@ export class UserComponent implements OnInit {
     addOfficeHour(){
         let json = JSON.parse("{\"beginTime\": \""+this.datumPocetak+"\", \"endTime\": \""+this.datumKraj+"\"}");
         this.officeHoursList.push(json);
+    }
+
+    deleteOfficeHour(){
+        this.officeHoursList = this.officeHoursList.filter(x => x.id != this.officeHour);
     }
 
 

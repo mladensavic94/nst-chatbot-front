@@ -72,10 +72,10 @@ export class NavbarComponent implements OnInit {
     }
 
     logout() {
-        localStorage.removeItem("email");
+        sessionStorage.removeItem("email");
     }
 
     isLoged(): boolean {
-        return localStorage.getItem("email") != null;
+        return sessionStorage.getItem("email") != null;
     }
 }

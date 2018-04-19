@@ -23,6 +23,7 @@ import {Tab} from './home/tab.component';
 import {Tabs} from './home/tabs.component';
 
 
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -43,7 +44,7 @@ import {Tabs} from './home/tabs.component';
         SidebarModule,
         RouterModule,
         AppRoutingModule,
-        LbdModule,
+        LbdModule
     ],
     providers: [
         AuthGuardService,
