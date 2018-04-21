@@ -21,6 +21,8 @@ import {JwtHelper} from "angular2-jwt";
 import {AuthService} from "./auth/auth.service";
 import {Tab} from './home/tab.component';
 import {Tabs} from './home/tabs.component';
+import {ProfessorService} from './services/professorService';
+import { AppointmentsService } from './services/appointmentsService';
 
 
 
@@ -49,6 +51,8 @@ import {Tabs} from './home/tabs.component';
     providers: [
         AuthGuardService,
         AuthService,
+        ProfessorService,
+        AppointmentsService,
         JwtHelper],
     bootstrap: [AppComponent]
 })

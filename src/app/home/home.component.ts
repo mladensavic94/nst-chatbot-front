@@ -1,15 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Http, Response, RequestOptions, Headers} from '@angular/http';
-import 'rxjs/add/operator/map';
+
 import {Router} from "@angular/router";
-import { Tabs } from './tabs.component';
+import { ProfessorService } from '../services/professorService';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
     email: string = "";
     password: string = "";
@@ -18,15 +17,11 @@ export class HomeComponent implements OnInit {
     prezime: string = "";
     message: string = "";
 
-    constructor(private http: Http, private router: Router) {
-    }
-
-    ngOnInit() {
-
+    constructor(private router: Router, private professorService: ProfessorService) {
     }
 
     login() {
-        this.getProfessor().subscribe(
+        this.professorService.getProfessor(this.email, this.password).subscribe(
             resBody =>{
                 if( resBody != null){
                     sessionStorage.setItem("email", btoa(this.email));
@@ -49,12 +44,7 @@ export class HomeComponent implements OnInit {
                 if(this.ime != ""){
                     if(this.prezime != ""){
                         if(this.password == this.password2){
-                        this.saveProfessor().subscribe(resBody => {
-                            window.location.reload();
-                        },
-                        error => {
-                            this.message = "Doslo je do greske prilikom registracije";
-                        });
+                            this.professorService.saveProfessor(0 ,this.email, this.password, this.ime, this.prezime, null).subscribe(resBody => this.message="shit updated!");
                         }else this.message = "Sifre se ne poklapaju!";
                     }else this.message = "Prezime ne sme biti prazno!";
                 }else this.message = "Ime ne sme biti prazno!";
@@ -62,22 +52,7 @@ export class HomeComponent implements OnInit {
         }else this.message = "Email ne sme biti prazan!";
     }
 
-    getProfessor() {
-        let url = 'https://nst-chatbot.herokuapp.com/rest/professor?email='+ this.email +'&password=' + this.password;
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.get(url, options).map((res:Response) => res.json());
-    }
-
-    saveProfessor(){
-        let url = 'https://nst-chatbot.herokuapp.com/rest/professor/save';
-        let headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-        let json = "{\"email\":\"" + this.email + "\",\"password\":\"" + this.password + "\",\"firstName\":\"" + this.ime + "\",\"lastName\":\"" + this.prezime + "\"}";
-        return this.http.post(url, json).map((res: Response) => {
-            res.headers;
-        });
-
-    }
+   
 
     isMessageSet ():boolean {
         return this.message != "";
