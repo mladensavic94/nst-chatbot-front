@@ -50,8 +50,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Ponovljena sifra</label>
-                                        <input type="password" class="form-control" required placeholder="Password"
-                                               [value]="password2" (input)="password2 = $event.target.value">
+                                        <input type="password" class="form-control" required placeholder="Password" [value]="password2" (input)="password2 = $event.target.value">
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +72,7 @@
                                         <label>Pocetak konsultacija</label>
                                         <input type="datetime-local" required class="form-control"
                                                placeholder="Novi datum - pocetak"
-                                               [value]="datumPocetak | date:'H:mm\'h\' dd. MMM'"
+                                               [value]="datumPocetak"
                                                (input)="datumPocetak = $event.target.value"></div>
                                 </div>
                             </div>
@@ -83,7 +82,7 @@
                                         <label>Kraj konsultacija</label>
                                         <input type="datetime-local" required class="form-control"
                                                placeholder="Novi datum - kraj"
-                                               [value]="datumKraj | date:'H:mm\'h\' dd. MMM'"
+                                               [value]="datumKraj"
                                                (input)="datumKraj = $event.target.value"></div>
                                 </div>
                             </div>

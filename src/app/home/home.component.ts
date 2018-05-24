@@ -21,23 +21,24 @@ export class HomeComponent {
     }
 
     login() {
-        this.professorService.getProfessor(this.email, this.password).subscribe(
-            resBody =>{
-                if( resBody != null){
-                    sessionStorage.setItem("email", btoa(this.email));
-                    sessionStorage.setItem("password", btoa(this.password));
-                    this.router.navigate(['table']);
-                    this.message = "";
-                }else{
-                    this.email = "";
-                    this.password = "";
-                    this.message = "Email or password is wrong";
+        this.professorService.login(this.email, this.password).subscribe((res) =>{
+            var headers = res.headers;
+            if(headers.get('Authorization') != null){
+                sessionStorage.setItem("email", btoa(this.email));
+                sessionStorage.setItem("password", btoa(this.password));
+                sessionStorage.setItem("token", btoa(headers.get('Authorization')));
+                this.router.navigate(['table']);
+                this.message = "";
+            }else{
+                this.email = "";
+                this.password = "";
+                this.message = "Email or password is wrong";
 
-                }
-            },
-            error => this.message = error,
-        );
-    }
+            }
+           
+        }, error => this.message = error
+    );}
+
     register(){
         if(this.email != ""){
             if(this.password != ""){

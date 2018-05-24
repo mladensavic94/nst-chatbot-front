@@ -5,10 +5,9 @@ import {JwtHelper} from 'angular2-jwt';
 export class AuthService {
     constructor() {
     }
-
-
+    
     public isAuthenticated(): boolean {
-        let email = sessionStorage.getItem("email");
+        let email = sessionStorage.getItem("token");
         return email != null;
     }
 }

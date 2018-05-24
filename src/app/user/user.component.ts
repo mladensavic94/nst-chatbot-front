@@ -71,7 +71,7 @@ export class UserComponent implements OnInit {
     }
 
     addOfficeHour(){
-        let json = JSON.parse("{\"beginTime\": \""+this.datumPocetak+"\", \"endTime\": \""+this.datumKraj+"\"}");
+        let json = {"beginTime": this.datumPocetak, "endTime" : this.datumKraj};
         this.officeHoursList.push(json);
     }
 

@@ -45,4 +45,14 @@ export class TablesComponent implements OnInit {
         error => console.log('Nesto se pojebalo'));
   }
 
+  btnEnabled(id: string): boolean{
+    for(let i = 0; i < this.arrayData.length; i++){
+        if(this.arrayData[i][0] === id && (this.arrayData[i][4] === "ACCEPTED" || this.arrayData[i][4] === "DENIED")){
+            return true;
+        }
+   }
+   return false;
+        
+  }
+
 }

@@ -9,12 +9,16 @@ export class AppointmentsService{
 
     getAppointments(email: string) {
         let url = 'https://nst-chatbot.herokuapp.com/rest/appointments?email=' + email;
-        return this.http.get(url).map((res: Response) => res.json());
+        let headers = new Headers({'Content-Type': 'application/json'});
+        headers.append('Authorization', atob(sessionStorage.getItem('token')));
+        let options = new RequestOptions({headers: headers});
+        return this.http.get(url, options).map((res: Response) => res.json());
     }
 
     changeState(id: number, state: string){
         let url = "https://nst-chatbot.herokuapp.com/rest/appointments/update";
         let headers = new Headers({'Content-Type': 'application/json'});
+        headers.append('Authorization', atob(sessionStorage.getItem('token')));
         let options = new RequestOptions({headers: headers});
         let json = {"id": id, "status": state};
         return this.http.post(url,JSON.stringify(json), options).map((res: Response) => res.json());
