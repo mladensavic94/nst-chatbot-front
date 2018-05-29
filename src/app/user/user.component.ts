@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Http, RequestOptions, Headers, Response} from "@angular/http";
 import 'rxjs/add/operator/map';
 import { ProfessorService } from '../services/professorService';
-
 @Component({
     selector: 'app-user',
     templateUrl: './user.component.html',
@@ -16,26 +15,35 @@ export class UserComponent implements OnInit {
     password2: string;
     ime: string;
     prezime: string;
-    datumPocetak: string = new Date().toDateString();
-    datumKraj: string = new Date().toDateString();
+    datumPocetak: Date = new Date();
+    datumKraj: Date = new Date();
     message: string = "";
     officeHoursList: any[];
     officeHour: any;
+    datepickerOpts = {
+        startDate: new Date(),
+        autoclose: true,
+        todayBtn: 'linked',
+        todayHighlight: true,
+        assumeNearbyYear: true,
+        format: 'd MM yyyy',
+        icon: 'fa fa-calendar'
+    }
 
     constructor(private http: Http, private professorService: ProfessorService) {
+        this.datumKraj.setTime(this.datumPocetak.getTime() + (3 * 60 * 60 * 1000));
     }
 
     ngOnInit() {
-        this.professorService.getProfessor(atob(sessionStorage.getItem("email")), atob(sessionStorage.getItem("password"))).subscribe(
+        this.professorService.getProfessor(atob(sessionStorage.getItem("email"))).subscribe(
             resBody => {
-                this.idProfessor = resBody.idProfessor;
+                this.idProfessor = resBody.idprofessor;
                 this.email = resBody.email;
                 this.password = resBody.password;
                 this.password2 = resBody.password;
                 this.ime = resBody.firstName;
                 this.prezime = resBody.lastName;
                 this.officeHoursList = resBody.listOfOfficeHours;
-                
             },
             error => console.log(error)
         );
@@ -44,7 +52,8 @@ export class UserComponent implements OnInit {
     saveChanges(){
         if (this.checkTime()) {
             if (this.checkPassword()) {
-                this.professorService.saveProfessor(this.idProfessor, this.email,this.password,this.ime, this.prezime, this.officeHoursList).subscribe(resBody => this.message="shit saved!");
+               
+                this.professorService.saveProfessor(this.idProfessor, this.email,this.password,this.ime, this.prezime, this.officeHoursList).subscribe();
             }
             else{
                 this.message = "Sifra je manje od 6 karaktera ili nije dobro ponovljena";
@@ -63,7 +72,8 @@ export class UserComponent implements OnInit {
     }
 
     checkPassword(): boolean {
-        return this.password == this.password2 && this.password.length >= 6;
+        return true;
+        //return this.password == this.password2 && this.password.length >= 6;
     }
 
     isMessageSet ():boolean {

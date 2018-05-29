@@ -8,8 +8,8 @@ export class ProfessorService{
     constructor(private http: Http){}
 
 
-    getProfessor(email: string, password: string) {
-        let url = 'https://nst-chatbot.herokuapp.com/rest/professor?email='+ email +'&password=' + password;
+    getProfessor(email: string) {
+        let url = 'https://nst-chatbot.herokuapp.com/rest/professor?email='+ email;
         let headers = new Headers({ 'Content-Type': 'application/json'});
         headers.append('Authorization', atob(sessionStorage.getItem('token')));
         let options = new RequestOptions({ headers: headers });
@@ -27,15 +27,17 @@ export class ProfessorService{
         let url = 'https://nst-chatbot.herokuapp.com/rest/professor/save';
         let headers = new Headers({'Content-Type': 'application/json'});
         headers.append('Authorization', atob(sessionStorage.getItem('token')));
-        let json = {"idProfessor" : idProfessor,
+        let json = {"idprofessor" : idProfessor,
                     "email"  : email,
                     "password" : password,
                     "firstName" : ime,
                     "lastName" : prezime,
                     "listOfOfficeHours" : listOfOfficeHours};
-        return this.http.post(url, JSON.stringify(json)).map((res: Response) => {
+                    let options = new RequestOptions({ headers: headers });
+                    
+        return this.http.post(url, JSON.stringify(json), options)/*.map((res: Response) => {
             res.json();
-        });
+        })*/;
 
     }
 }

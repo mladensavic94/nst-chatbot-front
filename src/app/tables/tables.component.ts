@@ -33,16 +33,14 @@ export class TablesComponent implements OnInit {
       };
   }
 
-  sendResponseToStudent(id: number, state: string){
-    this.appointmentsService.changeState(id, state).subscribe(
-        resBody => {
-            for(let i = 0; i < resBody.length; i++){
-                if(resBody[i].id == id){
-                    resBody[i].status = state;
+  sendResponseToStudent(id: string, state: string){
+    this.appointmentsService.changeState(id, state).subscribe();
+            for(let i = 0; i < this.arrayData.length; i++){
+                if(this.arrayData[i][0] === id){
+                    this.arrayData[i][4] = state;
                 }
            }
-        },
-        error => console.log('Nesto se pojebalo'));
+        
   }
 
   btnEnabled(id: string): boolean{

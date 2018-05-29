@@ -58,7 +58,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Raspored konsultacija</label>
-                                        <input list="officeHours" class="form-control" value="{{officeHoursList[0].beginTime | date:'H:mm dd. MMM'}} - {{officeHoursList[0].endTime | date:'H:mm dd. MMM'}}">
+                                        <input list="officeHours" class="form-control" >
                                         <datalist id="officeHours">
                                             <option *ngFor="let o of officeHoursList"
                                                     value="{{o.beginTime | date:'H:mm dd. MMM'}} - {{o.endTime | date:'H:mm dd. MMM'}}"></option>
@@ -70,20 +70,16 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Pocetak konsultacija</label>
-                                        <input type="datetime-local" required class="form-control"
-                                               placeholder="Novi datum - pocetak"
-                                               [value]="datumPocetak"
-                                               (input)="datumPocetak = $event.target.value"></div>
+                                        <datetime [(ngModel)]="datumPocetak" name="datumPocetak" [datepicker]="datepickerOpts" [timepicker]="{ showMeridian: false, minuteStep: 5, icon: 'fa fa-clock-o' }"></datetime>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Kraj konsultacija</label>
-                                        <input type="datetime-local" required class="form-control"
-                                               placeholder="Novi datum - kraj"
-                                               [value]="datumKraj"
-                                               (input)="datumKraj = $event.target.value"></div>
+                                        <datetime [(ngModel)]="datumKraj" name="datumPocetak" [datepicker]="datepickerOpts" [timepicker]="{ showMeridian: false, minuteStep: 5, icon: 'fa fa-clock-o' }"></datetime>
+                                        </div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-accept btn-fill" (click)="addOfficeHour()">Dodaj novi termin

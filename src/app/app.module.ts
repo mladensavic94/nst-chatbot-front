@@ -4,7 +4,6 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 
-
 import {AppRoutingModule} from './app.routing';
 import {NavbarModule} from './shared/navbar/navbar.module';
 import {FooterModule} from './shared/footer/footer.module';
@@ -23,6 +22,8 @@ import {Tab} from './home/tab.component';
 import {Tabs} from './home/tabs.component';
 import {ProfessorService} from './services/professorService';
 import { AppointmentsService } from './services/appointmentsService';
+import * as $ from 'jquery';
+import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 
 
 
@@ -46,7 +47,8 @@ import { AppointmentsService } from './services/appointmentsService';
         SidebarModule,
         RouterModule,
         AppRoutingModule,
-        LbdModule
+        LbdModule,
+        NKDatetimeModule
     ],
     providers: [
         AuthGuardService,

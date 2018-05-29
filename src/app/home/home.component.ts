@@ -25,7 +25,6 @@ export class HomeComponent {
             var headers = res.headers;
             if(headers.get('Authorization') != null){
                 sessionStorage.setItem("email", btoa(this.email));
-                sessionStorage.setItem("password", btoa(this.password));
                 sessionStorage.setItem("token", btoa(headers.get('Authorization')));
                 this.router.navigate(['table']);
                 this.message = "";

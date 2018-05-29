@@ -15,7 +15,7 @@ export class AppointmentsService{
         return this.http.get(url, options).map((res: Response) => res.json());
     }
 
-    changeState(id: number, state: string){
+    changeState(id: string, state: string){
         let url = "https://nst-chatbot.herokuapp.com/rest/appointments/update";
         let headers = new Headers({'Content-Type': 'application/json'});
         headers.append('Authorization', atob(sessionStorage.getItem('token')));
