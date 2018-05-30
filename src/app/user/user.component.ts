@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Http, RequestOptions, Headers, Response} from "@angular/http";
 import 'rxjs/add/operator/map';
 import { ProfessorService } from '../services/professorService';
+declare var $: any;
 @Component({
     selector: 'app-user',
     templateUrl: './user.component.html',
@@ -20,15 +21,7 @@ export class UserComponent implements OnInit {
     message: string = "";
     officeHoursList: any[];
     officeHour: any;
-    datepickerOpts = {
-        startDate: new Date(),
-        autoclose: true,
-        todayBtn: 'linked',
-        todayHighlight: true,
-        assumeNearbyYear: true,
-        format: 'd MM yyyy',
-        icon: 'fa fa-calendar'
-    }
+
 
     constructor(private http: Http, private professorService: ProfessorService) {
         this.datumKraj.setTime(this.datumPocetak.getTime() + (3 * 60 * 60 * 1000));
@@ -47,6 +40,33 @@ export class UserComponent implements OnInit {
             },
             error => console.log(error)
         );
+        $('#timepicker1').timepicker({
+            showInputs: false,
+            timeFormat: 'HH:mm',
+            startTime: new Date(),
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true,
+            interval: 5,
+            zindex: 1000,
+            change: function(time) {
+                var element = $(this), text;
+                var timepicker = element.timepicker();
+                text =  timepicker.format(time);
+                var values: string[] = text.split(":");
+            
+            }
+          });
+          $('#timepicker2').timepicker({
+            showInputs: false,
+            timeFormat: 'HH:mm',
+            startTime: new Date(),
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true,
+            interval: 5,
+            zindex: 1000
+          });        
     }
 
     saveChanges(){
@@ -82,7 +102,14 @@ export class UserComponent implements OnInit {
 
     addOfficeHour(){
         let json = {"beginTime": this.datumPocetak, "endTime" : this.datumKraj};
-        this.officeHoursList.push(json);
+        let pocetak = $("#timepicker1").val();
+        this.datumPocetak = new Date(this.datumPocetak);
+        this.datumPocetak.setHours(parseInt(pocetak.split(":")[0]), parseInt(pocetak.split(":")[1]));
+        let kraj = $("#timepicker2").val();
+        this.datumKraj = new Date(this.datumKraj);
+        this.datumKraj.setHours(parseInt(kraj.split(":")[0]), parseInt(kraj.split(":")[1]));
+        alert(JSON.stringify(json))
+        //this.officeHoursList.push(json);
     }
 
     deleteOfficeHour(){

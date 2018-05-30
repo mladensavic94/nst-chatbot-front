@@ -20,15 +20,20 @@
       "styles": [
         "assets/sass/light-bootstrap-dashboard.scss",
 		"../node_modules/font-awesome/css/font-awesome.css",
-		"../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css"
+		"../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css",
+		"../node_modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css",
+		"../node_modules/jquery-timepicker/jquery.timepicker.css"
       ],
       "scripts": [
           "../node_modules/jquery/dist/jquery.js",
+		  "../node_modules/jquery-ui-dist/jquery-ui.js",
+		  "../node_modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js",
+		  "../node_modules/jquery-timepicker/jquery.timepicker.js",
           "../node_modules/bootstrap/dist/js/bootstrap.js",
           "../node_modules/bootstrap-notify/bootstrap-notify.js",
           "../node_modules/chartist/dist/chartist.js",
-		  "../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
-		  "../node_modules/bootstrap-timepicker/js/bootstrap-timepicker.js"
+		  "../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"
+	
       ],
         "environmentSource": "environments/environment.ts",
         "environments": {

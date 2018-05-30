@@ -1,7 +1,7 @@
 <div class="main-content" xmlns:date="http://www.w3.org/1999/xhtml">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-2">
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Profil</h4>
@@ -11,7 +11,7 @@
                             <div class="alert alert-danger" [hidden]="!isMessageSet()"><label style="color: black">{{message}}</label>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-10 col-md-offset-1">
                                     <div class="form-group">
                                         <label>Ime</label>
                                         <input type="text" class="form-control" required placeholder="Ime"
@@ -20,7 +20,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-10 col-md-offset-1">
                                     <div class="form-group">
                                         <label>Prezime</label>
                                         <input type="text" class="form-control" required placeholder="Prezime"
@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-10 col-md-offset-1">
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="email" class="form-control" required placeholder="Email"
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-10 col-md-offset-1">
                                     <div class="form-group">
                                         <label>Sifra</label>
                                         <input type="password" class="form-control" required placeholder="Password"
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-10 col-md-offset-1">
                                     <div class="form-group">
                                         <label>Ponovljena sifra</label>
                                         <input type="password" class="form-control" required placeholder="Password" [value]="password2" (input)="password2 = $event.target.value">
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-10 col-md-offset-1">
                                     <div class="form-group">
                                         <label>Raspored konsultacija</label>
                                         <input list="officeHours" class="form-control" >
@@ -67,25 +67,31 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-10 col-md-offset-1">
                                     <div class="form-group">
                                         <label>Pocetak konsultacija</label>
-                                        <datetime [(ngModel)]="datumPocetak" name="datumPocetak" [datepicker]="datepickerOpts" [timepicker]="{ showMeridian: false, minuteStep: 5, icon: 'fa fa-clock-o' }"></datetime>
+                                        <div class="form-inline">
+                                            <input type="date" id="datepicker" class="form-control" [value]="datumPocetak" (input)="datumPocetak = $event.target.value">
+                                            <input type="text" id="timepicker1" class="form-control">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-10 col-md-offset-1">
                                     <div class="form-group">
                                         <label>Kraj konsultacija</label>
-                                        <datetime [(ngModel)]="datumKraj" name="datumPocetak" [datepicker]="datepickerOpts" [timepicker]="{ showMeridian: false, minuteStep: 5, icon: 'fa fa-clock-o' }"></datetime>
+                                        <div class="form-inline">
+                                            <input type="date" id="datepicker" class="form-control" [value]="datumKraj" (input)="datumKraj = $event.target.value">
+                                            <input type="text" id="timepicker2" class="form-control">
+                                        </div>
                                         </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-accept btn-fill" (click)="addOfficeHour()">Dodaj novi termin
+                            <button type="submit" class="btn btn-accept btn-fill col-md-10 col-md-offset-1" (click)="addOfficeHour()">Dodaj novi termin
                             </button>
                             <br><br>
-                            <button type="submit" class="btn btn-success btn-fill" (click)="saveChanges()">Sacuvaj promene
+                            <button type="submit" class="btn btn-success btn-fill col-md-10 col-md-offset-1" (click)="saveChanges()">Sacuvaj promene
                             </button>
                             <div class="clearfix"></div>
                         </form>
@@ -94,4 +100,5 @@
             </div>
         </div>
     </div>
+
 </div>

@@ -24,6 +24,7 @@ import {ProfessorService} from './services/professorService';
 import { AppointmentsService } from './services/appointmentsService';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
+import { LOCALE_ID } from '@angular/core';
 
 
 
@@ -55,6 +56,7 @@ import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
         AuthService,
         ProfessorService,
         AppointmentsService,
+        {provide: LOCALE_ID, useValue: 'sr-RS' },
         JwtHelper],
     bootstrap: [AppComponent]
 })
