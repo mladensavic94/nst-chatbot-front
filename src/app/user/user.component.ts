@@ -48,14 +48,7 @@ export class UserComponent implements OnInit {
             dropdown: true,
             scrollbar: true,
             interval: 5,
-            zindex: 1000,
-            change: function(time) {
-                var element = $(this), text;
-                var timepicker = element.timepicker();
-                text =  timepicker.format(time);
-                var values: string[] = text.split(":");
-            
-            }
+            zindex: 1000
           });
           $('#timepicker2').timepicker({
             showInputs: false,
@@ -101,20 +94,33 @@ export class UserComponent implements OnInit {
     }
 
     addOfficeHour(){
-        let json = {"beginTime": this.datumPocetak, "endTime" : this.datumKraj};
+       
         let pocetak = $("#timepicker1").val();
         this.datumPocetak = new Date(this.datumPocetak);
-        this.datumPocetak.setHours(parseInt(pocetak.split(":")[0]), parseInt(pocetak.split(":")[1]));
+        this.datumPocetak.setHours(parseInt(pocetak.split(":")[0]));
+        this.datumPocetak.setMinutes(parseInt(pocetak.split(":")[1]))
         let kraj = $("#timepicker2").val();
         this.datumKraj = new Date(this.datumKraj);
-        this.datumKraj.setHours(parseInt(kraj.split(":")[0]), parseInt(kraj.split(":")[1]));
-        alert(JSON.stringify(json))
-        //this.officeHoursList.push(json);
+        this.datumKraj.setHours(parseInt(kraj.split(":")[0]));
+        this.datumKraj.setMinutes(parseInt(kraj.split(":")[1]))
+        let json = {"beginTime": this.datumPocetak, "endTime" : this.datumKraj};
+        this.officeHoursList.push(json);
+        console.log(JSON.stringify(this.officeHoursList))
     }
 
     deleteOfficeHour(){
-        this.officeHoursList = this.officeHoursList.filter(x => x.id != this.officeHour);
+       let date = this.officeHour.split("-")[1]
+       let datum = Date.parse(date)
+            alert(datum)
     }
-
+    
+    checkNewDate():boolean{
+        let date1 = $("#datepicker1").val();
+        let time1 = $("#timepicker1").val();
+        let date2 = $("#datepicker2").val();
+        let time2 = $("#timepicker2").val();
+        if(date1 != "" && date2 != "" && time1 != "" && time2 != "") return false;
+        return true;
+    }
 
 }

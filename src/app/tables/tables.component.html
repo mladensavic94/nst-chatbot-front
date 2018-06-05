@@ -17,6 +17,9 @@
                             <tr *ngFor="let row of tableData.dataRows">
                                 <td class="text-center" *ngFor="let cell of row">{{cell}}</td>
                                 <td class="text-center">
+                                    <input type="text" class="form-control" [disabled]  = "inputEnabled(row[0])" [value] = "getLengthValue(row[0])"  style="width: 50px; margin-left: 35%"/>
+                                </td>
+                                <td class="text-center">
                                     <button type="submit" class="btn btn-success btn-fill" [disabled]  = "btnEnabled(row[0])" style="width: 50%;" (click)="sendResponseToStudent(row[0], 'ACCEPTED')">Accept</button>
                                     <button type="submit" class="btn btn-danger btn-fill" [disabled]  = "btnEnabled(row[0])" style="width: 50%;" (click)="sendResponseToStudent(row[0], 'DENIED')">Deny</button>
                                 </td>
