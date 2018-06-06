@@ -8,7 +8,6 @@ import {AppRoutingModule} from './app.routing';
 import {NavbarModule} from './shared/navbar/navbar.module';
 import {FooterModule} from './shared/footer/footer.module';
 import {SidebarModule} from './sidebar/sidebar.module';
-import {LbdModule} from './lbd/lbd.module';
 
 import {AppComponent} from './app.component';
 
@@ -24,8 +23,6 @@ import {ProfessorService} from './services/professorService';
 import { AppointmentsService } from './services/appointmentsService';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
-
-
 
 @NgModule({
     declarations: [
@@ -47,7 +44,6 @@ import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
         SidebarModule,
         RouterModule,
         AppRoutingModule,
-        LbdModule,
         NKDatetimeModule
     ],
     providers: [

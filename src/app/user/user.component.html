@@ -58,11 +58,12 @@
                                 <div class="col-md-10 col-md-offset-1">
                                     <div class="form-group">
                                         <label>Raspored konsultacija</label>
-                                        <input list="officeHours" class="form-control" id="officeHoursList" (input) = "officeHour = $event.target.value">
-                                        <datalist id="officeHours">
+                                        <select class="form-control" [value] = "officeHour" (input)="officeHour = $event.target.value">
                                             <option *ngFor="let o of officeHoursList"
-                                                value="{{o.beginTime | date:'H:mm'}} - {{o.endTime | date:'H:mm'}}h {{o.endTime | date:'dd.MM.yyyy'}}"></option>
-                                        </datalist>
+                                                value="{{o.beginTime}};{{o.endTime}}">
+                                                {{o.beginTime | date:'H:mm'}} - {{o.endTime | date:'H:mm'}}h {{o.endTime | date:'dd.MM.yyyy'}}</option>
+                                        </select>
+                                        
                                        
                                     </div>
                                     <button type="submit" class="btn btn-accept btn-fill col-md-12" (click)="deleteOfficeHour()">Ukloni izabrani termin

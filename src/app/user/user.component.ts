@@ -94,12 +94,13 @@ export class UserComponent implements OnInit {
     }
 
     addOfficeHour(){
-       
         let pocetak = $("#timepicker1").val();
+        $("#timepicker1").val("");
         this.datumPocetak = new Date(this.datumPocetak);
         this.datumPocetak.setHours(parseInt(pocetak.split(":")[0]));
         this.datumPocetak.setMinutes(parseInt(pocetak.split(":")[1]))
         let kraj = $("#timepicker2").val();
+        $("#timepicker2").val("");
         this.datumKraj = new Date(this.datumKraj);
         this.datumKraj.setHours(parseInt(kraj.split(":")[0]));
         this.datumKraj.setMinutes(parseInt(kraj.split(":")[1]))
@@ -109,9 +110,9 @@ export class UserComponent implements OnInit {
     }
 
     deleteOfficeHour(){
-       let date = this.officeHour.split("-")[1]
-       let datum = Date.parse(date)
-            alert(datum)
+        let begin = this.officeHour.split(";")[0];
+        let end = this.officeHour.split(";")[1];
+       this.officeHoursList = this.officeHoursList.filter( x => x.endTime != end && x.beginTime != begin)
     }
     
     checkNewDate():boolean{
