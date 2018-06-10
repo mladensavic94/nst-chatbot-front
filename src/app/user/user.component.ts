@@ -106,7 +106,7 @@ export class UserComponent implements OnInit {
         this.datumKraj.setMinutes(parseInt(kraj.split(":")[1]))
         let json = {"beginTime": this.datumPocetak, "endTime" : this.datumKraj};
         this.officeHoursList.push(json);
-        console.log(JSON.stringify(this.officeHoursList))
+        
     }
 
     deleteOfficeHour(){
