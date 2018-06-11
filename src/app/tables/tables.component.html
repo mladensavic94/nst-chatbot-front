@@ -9,17 +9,18 @@
                     <div class="content table-responsive table-full-width">
                         <table class="table table-hover table-striped table-responsive">
                             <thead >
-                            <tr >
+                            <tr style="max-width: 100px;">
                                 <th class="text-center" *ngFor="let cell of tableData.headerRow">{{ cell }}</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let row of tableData.dataRows">
-                                <td class="text-center" *ngFor="let cell of row">{{cell}}</td>
-                                <td class="text-center">
-                                    <input type="text" class="form-control" [disabled]  = "inputEnabled(row[0])" [value] = "getLengthValue(row[0])"  style="width: 50px; margin-left: 35%"/>
+                            <tr *ngFor="let row of tableData.dataRows" >
+                                <td class="text-center" *ngFor="let cell of row" style="max-width: 100px;">{{cell}}</td>
+                            
+                                <td class="text-center"  style="max-width: 100px;">
+                                    <input type="text" class="form-control input{{row[0]}}" [disabled]  = "inputEnabled(row[0])" [value] = "getLengthValue(row[0])"/>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center"  style="max-width: 100px;">
                                     <button type="submit" class="btn btn-success btn-fill" [disabled]  = "btnEnabled(row[0])" style="width: 50%;" (click)="sendResponseToStudent(row[0], 'ACCEPTED')">Accept</button>
                                     <button type="submit" class="btn btn-danger btn-fill" [disabled]  = "btnEnabled(row[0])" style="width: 50%;" (click)="sendResponseToStudent(row[0], 'DENIED')">Deny</button>
                                 </td>

@@ -15,12 +15,13 @@ export class AppointmentsService{
         return this.http.get(url, options).map((res: Response) => res.json());
     }
 
-    changeState(id: string, state: string){
+    changeState(id: string, state: string, length: number){
         let url = "https://nst-chatbot.herokuapp.com/rest/appointments/update";
         let headers = new Headers({'Content-Type': 'application/json'});
         headers.append('Authorization', atob(sessionStorage.getItem('token')));
         let options = new RequestOptions({headers: headers});
-        let json = {"id": id, "status": state};
+        let json = {"id": id, "status": state, "length": length};      
+        alert(JSON.stringify(json))  
         return this.http.post(url,JSON.stringify(json), options).map((res: Response) => res.json());
     }
 }
