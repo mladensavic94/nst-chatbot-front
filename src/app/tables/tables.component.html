@@ -7,6 +7,12 @@
                         <h4 class="title">Konsultacije</h4>
                     </div>
                     <div class="content table-responsive table-full-width">
+                            <select class="form-control" [value] = "officeHour" (input)="officeHour = $event.target.value" (change)= "filterOfficeHours()" style="width: 20%; margin-left: 1%">
+                                <option value=0>Sve</option>
+                                    <option *ngFor="let o of officeHourList"
+                                        value="{{o.id}}">
+                                        {{o.beginTime | date:'H:mm'}} - {{o.endTime | date:'H:mm'}}h {{o.endTime | date:'dd.MM.yyyy'}}</option>
+                                </select>
                         <table class="table table-hover table-striped table-responsive">
                             <thead >
                             <tr style="max-width: 100px;">
@@ -16,7 +22,13 @@
                             <tbody>
                             <tr *ngFor="let row of tableData.dataRows" >
                                 <td class="text-center" *ngFor="let cell of row" style="max-width: 100px;">{{cell}}</td>
-                            
+
+                                <td class="text-center"  style="max-width: 100px;" *ngIf = "getDescStatus(row[0])">
+                                    <a href="{{getDescValue(row[0])}}" target="_blank">Link</a>
+                                </td>
+                                <td class="text-center"  style="max-width: 100px;" *ngIf = "!getDescStatus(row[0])">
+                                    <p>{{getDescValue(row[0])}}</p>
+                                </td>
                                 <td class="text-center"  style="max-width: 100px;">
                                     <input type="text" class="form-control input{{row[0]}}" [disabled]  = "inputEnabled(row[0])" [value] = "getLengthValue(row[0])"/>
                                 </td>

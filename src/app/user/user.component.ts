@@ -65,7 +65,6 @@ export class UserComponent implements OnInit {
     saveChanges(){
         if (this.checkTime()) {
             if (this.checkPassword()) {
-               
                 this.professorService.saveProfessor(this.idProfessor, this.email,this.password,this.ime, this.prezime, this.officeHoursList).subscribe();
             }
             else{
@@ -106,6 +105,7 @@ export class UserComponent implements OnInit {
         this.datumKraj.setMinutes(parseInt(kraj.split(":")[1]))
         let json = {"beginTime": this.datumPocetak, "endTime" : this.datumKraj};
         this.officeHoursList.push(json);
+        alert(JSON.stringify(json))
         
     }
 

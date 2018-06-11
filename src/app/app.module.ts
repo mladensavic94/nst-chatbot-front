@@ -23,6 +23,8 @@ import {ProfessorService} from './services/professorService';
 import { AppointmentsService } from './services/appointmentsService';
 import * as $ from 'jquery';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
+import { LOCALE_ID } from '@angular/core';
+
 
 @NgModule({
     declarations: [
@@ -45,13 +47,15 @@ import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
         RouterModule,
         AppRoutingModule,
         NKDatetimeModule
+        
     ],
     providers: [
         AuthGuardService,
         AuthService,
         ProfessorService,
         AppointmentsService,
-        JwtHelper],
+        JwtHelper,
+        {provide: LOCALE_ID, useValue: 'en-US' }],
     bootstrap: [AppComponent]
 })
 export class AppModule {

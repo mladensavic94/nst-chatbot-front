@@ -44,7 +44,7 @@ export class HomeComponent {
                 if(this.ime != ""){
                     if(this.prezime != ""){
                         if(this.password == this.password2){
-                            this.professorService.saveProfessor(0 ,this.email, this.password, this.ime, this.prezime, null).subscribe(resBody => this.message="shit updated!");
+                            this.professorService.register(this.email, this.password, this.ime, this.prezime, null).subscribe();
                         }else this.message = "Sifre se ne poklapaju!";
                     }else this.message = "Prezime ne sme biti prazno!";
                 }else this.message = "Ime ne sme biti prazno!";
