@@ -113,7 +113,7 @@ export class UserComponent implements OnInit {
         let begin = this.officeHour.split(";")[0];
         let end = this.officeHour.split(";")[1];
        this.officeHoursList = this.officeHoursList.filter( x => x.endTime != end && x.beginTime != begin)
-    }
+     }
     
     checkNewDate():boolean{
         let date1 = $("#datepicker1").val();
