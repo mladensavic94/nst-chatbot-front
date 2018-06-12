@@ -27,7 +27,7 @@ export class TablesComponent implements OnInit {
       this.appointmentsService.getAppointments(atob(sessionStorage.getItem("email"))).subscribe(
           resBody => {
             for(let i = 0; i < resBody.length; i++){
-                 this.arrayData.push([resBody[i].id, resBody[i].name, resBody[i].dateAndTime, resBody[i].studentID, resBody[i].status]);
+                this.arrayData.push([resBody[i].id, resBody[i].name, resBody[i].dateAndTime, resBody[i].studentID, resBody[i].status]);
                 this.lengthData.push([resBody[i].id, resBody[i].length, resBody[i].description]);
                 }
           },
@@ -39,7 +39,12 @@ export class TablesComponent implements OnInit {
       };
       this.professorService.getProfessor(atob(sessionStorage.getItem("email"))).subscribe(
         resBody => {
-                this.officeHourList = resBody.listOfOfficeHours; 
+                this.officeHourList = resBody.listOfOfficeHours;
+                this.officeHourList = this.officeHourList.sort(function(a, b) {
+                    if (a.id < b.id) return -1;
+                    else if (a.id > b.id) return 1;
+                    else return 0;
+                }) 
           },
           error => console.log(error)
       );
@@ -85,7 +90,9 @@ export class TablesComponent implements OnInit {
   getDescValue(id: string):string{
     for(let i = 0; i < this.lengthData.length; i++){
         if(this.lengthData[i][0] === id && this.lengthData[i][2] != undefined){
-            return this.lengthData[i][2];
+            if(this.lengthData[i][2].length > 200){
+                return this.lengthData[i][2].substring(0,200) + "...";
+            }else return this.lengthData[i][2];
         }
    } 
    return "Undefined"

@@ -24,7 +24,7 @@
                                 <td class="text-center" *ngFor="let cell of row" style="max-width: 100px;">{{cell}}</td>
 
                                 <td class="text-center"  style="max-width: 100px;" *ngIf = "getDescStatus(row[0])">
-                                    <a href="{{getDescValue(row[0])}}" target="_blank">Link</a>
+                                    <a href="{{getDescValue(row[0])}}" target="_blank">Attachment</a>
                                 </td>
                                 <td class="text-center"  style="max-width: 100px;" *ngIf = "!getDescStatus(row[0])">
                                     <p>{{getDescValue(row[0])}}</p>
@@ -33,7 +33,7 @@
                                     <input type="text" class="form-control input{{row[0]}}" [disabled]  = "inputEnabled(row[0])" [value] = "getLengthValue(row[0])"/>
                                 </td>
                                 <td class="text-center"  style="max-width: 100px;">
-                                    <button type="submit" class="btn btn-success btn-fill" [disabled]  = "btnEnabled(row[0])" style="width: 50%;" (click)="sendResponseToStudent(row[0], 'ACCEPTED')">Accept</button>
+                                    <button type="submit" class="btn btn-success btn-fill" [disabled]  = "btnEnabled(row[0])" style="width: 50%; margin-bottom: 2px" (click)="sendResponseToStudent(row[0], 'ACCEPTED')">Accept</button>
                                     <button type="submit" class="btn btn-danger btn-fill" [disabled]  = "btnEnabled(row[0])" style="width: 50%;" (click)="sendResponseToStudent(row[0], 'DENIED')">Deny</button>
                                 </td>
                             </tr>
