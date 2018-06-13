@@ -43,7 +43,7 @@ export class UserComponent implements OnInit {
         $('#timepicker1').timepicker({
             showInputs: false,
             timeFormat: 'HH:mm',
-            startTime: new Date(),
+            startTime: "08:00",
             dynamic: true,
             dropdown: true,
             scrollbar: true,
@@ -53,7 +53,7 @@ export class UserComponent implements OnInit {
           $('#timepicker2').timepicker({
             showInputs: false,
             timeFormat: 'HH:mm',
-            startTime: new Date(),
+            startTime: "08:00",
             dynamic: true,
             dropdown: true,
             scrollbar: true,
@@ -105,7 +105,6 @@ export class UserComponent implements OnInit {
         this.datumKraj.setMinutes(parseInt(kraj.split(":")[1]))
         let json = {"beginTime": this.datumPocetak, "endTime" : this.datumKraj};
         this.officeHoursList.push(json);
-        alert(JSON.stringify(json))
         
     }
 

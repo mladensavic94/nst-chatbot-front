@@ -21,7 +21,6 @@ export class AppointmentsService{
         headers.append('Authorization', atob(sessionStorage.getItem('token')));
         let options = new RequestOptions({headers: headers});
         let json = {"id": id, "status": state, "length": length};      
-        alert(JSON.stringify(json))  
         return this.http.post(url,JSON.stringify(json), options).map((res: Response) => res.json());
     }
 }

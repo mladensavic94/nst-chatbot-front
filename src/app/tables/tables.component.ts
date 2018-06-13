@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AppointmentsService } from '../services/appointmentsService';
 import { Router } from '@angular/router';
 import { ProfessorService } from '../services/professorService';
+import { DatePipe } from '@angular/common';
 declare var $: any;
 
 declare interface TableData {
@@ -53,12 +54,22 @@ export class TablesComponent implements OnInit {
   sendResponseToStudent(id: string, state: string){
     let idLen = "input"+id;
     let length = $("."+idLen).val();
-    this.appointmentsService.changeState(id, state, parseInt(length)).subscribe();
-        for(let i = 0; i < this.arrayData.length; i++){
-            if(this.arrayData[i][0] === id){
-                this.arrayData[i][4] = state;
-            }
-        }
+    this.appointmentsService.changeState(id, state, parseInt(length)).subscribe(
+        resBody =>{
+            for(let i = 0; i < this.arrayData.length; i++){
+                if(this.arrayData[i][0] === id){
+                    let date =  new Date(parseInt((JSON.stringify(resBody))));
+                    date.setHours(date.getHours()-2)
+                    this.arrayData[i][4] = state
+                    var datePipe = new DatePipe("en-US");
+                    this.arrayData[i][2] = datePipe.transform(date, "MMM dd, yyyy hh:mm:ss a")
+     
+                }
+            }},
+            error => console.error(error)
+                    
+    );
+        
     
   }
 
