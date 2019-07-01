@@ -22,7 +22,6 @@ import {Tabs} from './home/tabs.component';
 import {ProfessorService} from './services/professorService';
 import { AppointmentsService } from './services/appointmentsService';
 import * as $ from 'jquery';
-import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { LOCALE_ID } from '@angular/core';
 
 
@@ -45,8 +44,7 @@ import { LOCALE_ID } from '@angular/core';
         FooterModule,
         SidebarModule,
         RouterModule,
-        AppRoutingModule,
-        NKDatetimeModule
+        AppRoutingModule
         
     ],
     providers: [
